@@ -233,6 +233,7 @@ h1{
   cursor: pointer;
   text-decoration: none;
   border: 1px solid transparent;
+  transition: box-shadow 220ms ease, border-color 220ms ease;
 }
 
 .btn-primary{
@@ -244,6 +245,20 @@ h1{
   background: transparent;
   color: var(--text);
   border-color: #fdeccc;
+}
+
+.btn-secondary{
+  background: transparent;
+  color: var(--text);
+  border-color: var(--text);
+  box-shadow: none;
+}
+
+.btn-secondary:hover{
+  background: transparent;
+  color: var(--text);
+  border-color: var(--text); /* adjust for desired hue */
+  box-shadow: 0 0 4px var(--text);
 }
 
 .note{ margin-top: 14px; color: var(--muted); font-size: .92rem; }
