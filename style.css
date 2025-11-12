@@ -12,6 +12,7 @@
   --ring: rgba(255, 255, 255, 0);
 
   /* Optional focus hint if you ever need it elsewhere */
+  --vh: 1svh;
   --img-focus-y: 60%;
 }
 
@@ -19,14 +20,13 @@
    Reset / Base
 ========================= */
 * { box-sizing: border-box; }
-html, body { height: 100%; }
+html, body { height: 100%; background-color: #72513cf1; /* fallback page color lives on body, not the overlay */}
 
 body{
   display: flex;
   flex-direction: column;
   padding-top: calc(var(--top-space) + env(safe-area-inset-top));
   position: relative;
-  background-color: #72513cf1; /* fallback page color lives on body, not the overlay */
   margin: 0;
   color: var(--text);
   font-family: 'Ovo', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -50,9 +50,10 @@ body{
 ========================= */
 .site-bg{
   position: fixed;
-  inset: 0;
+  left: 0;
+  top: 0;
   width: 100%;
-  height: 100svh;
+  height: calc(var(--vh) * 100);
   min-height: 100svh;
   object-fit: cover;
   object-position: 70% var(--img-focus-y);
@@ -62,7 +63,7 @@ body{
   --darkreader-ignore: true;
 }
 @supports (min-height: 100dvh) {
-  .site-bg { height: 100dvh; min-height: 100dvh;}
+  .site-bg {min-height: 100dvh;}
 }
 
 /* Overlay gradients & base color above the image */
