@@ -209,7 +209,7 @@ h1{
 .sub{
   max-width: 720px;
   margin: 0 auto 28px;
-  color: #d3d6dd;
+  color: var(--text);
   font-size: clamp(16px, 2.2vw, 20px);
 }
 
