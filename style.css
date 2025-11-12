@@ -3,10 +3,10 @@
 ========================= */
 :root{
   --bg: #000000;
-  --card: #082d19d8;
+  --card: #2b1e0be6;
   --text: #fdeccc;
-  --muted: #a7abb3;
-  --brand: #fdeccc;
+  --muted: hsl(220, 7%, 68%);
+  --brand: #125d41;
   --brand-ink: #72513cf1;
   --ring: rgba(255, 255, 255, 0);
 
@@ -25,7 +25,7 @@ body{
   flex-direction: column;
   padding-top: calc(var(--top-space) + env(safe-area-inset-top));
   position: relative;
-  background-color: #14848a00; /* fallback page color lives on body, not the overlay */
+  background-color: #14848ab2; /* fallback page color lives on body, not the overlay */
   margin: 0;
   color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -71,7 +71,7 @@ body::before{
   z-index: 1; /* above image */
   pointer-events: none;
   background:
-    radial-gradient(1200px 600px at 80% -10%, #72513cd7 0%);
+    radial-gradient(1200px 600px at 80% -10%, #72513cbe 0%);
   --darkreader-ignore: true;
 }
 
@@ -237,7 +237,7 @@ h1{
 
 .btn-primary{
   background: var(--brand);
-  color: var(--card);
+  color: var(--text);
 }
 
 .btn-primary:hover{
@@ -245,13 +245,6 @@ h1{
   color: var(--text);
   border-color: #fdeccc;
 }
-
-.btn-ghost{
-  background: transparent;
-  color: var(--btntxt);
-  border-color: #FDFBF6;
-}
-.btn-ghost:hover{ border-color: #2f2f36; }
 
 .note{ margin-top: 14px; color: var(--muted); font-size: .92rem; }
 
@@ -279,6 +272,7 @@ footer{
   flex-wrap: wrap;
   position: relative;
 }
+
 .foot a{ color: var(--text); }
 
 #mail-chooser{
