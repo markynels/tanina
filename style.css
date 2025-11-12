@@ -3,11 +3,11 @@
 ========================= */
 :root{
   --bg: #000000;
-  --card: #191a17;
-  --text: #fcfdfd;
+  --card: #082d19d8;
+  --text: #fdeccc;
   --muted: #a7abb3;
-  --brand: #5B6CFF;
-  --brand-ink: #5B6CFF;
+  --brand: #fdeccc;
+  --brand-ink: #72513cf1;
   --ring: rgba(255, 255, 255, 0);
 
   /* Optional focus hint if you ever need it elsewhere */
@@ -25,7 +25,7 @@ body{
   flex-direction: column;
   padding-top: calc(var(--top-space) + env(safe-area-inset-top));
   position: relative;
-  background-color: #14848ac3; /* fallback page color lives on body, not the overlay */
+  background-color: #14848a00; /* fallback page color lives on body, not the overlay */
   margin: 0;
   color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -71,7 +71,7 @@ body::before{
   z-index: 1; /* above image */
   pointer-events: none;
   background:
-    radial-gradient(1200px 600px at 80% -10%, #380567d7 0%);
+    radial-gradient(1200px 600px at 80% -10%, #72513cd7 0%);
   --darkreader-ignore: true;
 }
 
@@ -176,7 +176,7 @@ header{
 
 .nav{ opacity: .85; }
 .nav a{
-  color: var(--muted);
+  color: var(--text);
   text-decoration: none;
   margin-left: 16px;
   font-size: .95rem;
@@ -227,7 +227,7 @@ h1{
 .btn{
   appearance: none;
   padding: 14px 22px;
-  border-radius: 12px;
+  border-radius: 6px;
   font-weight: 600;
   letter-spacing: .2px;
   cursor: pointer;
@@ -237,19 +237,19 @@ h1{
 
 .btn-primary{
   background: var(--brand);
-  color: var(--text);
-  border-color: #5B6CFF;
+  color: var(--card);
 }
+
 .btn-primary:hover{
-  background: #848ff3;
+  background: transparent;
   color: var(--text);
-  border-color: #5B6CFF;
+  border-color: #fdeccc;
 }
 
 .btn-ghost{
   background: transparent;
-  color: var(--text);
-  border-color: #f6f7f9;
+  color: var(--btntxt);
+  border-color: #FDFBF6;
 }
 .btn-ghost:hover{ border-color: #2f2f36; }
 
