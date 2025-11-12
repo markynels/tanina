@@ -1,0 +1,398 @@
+/* =========================
+   Theme Tokens
+========================= */
+:root{
+  --bg: #000000;
+  --card: #191a17;
+  --text: #fcfdfd;
+  --muted: #a7abb3;
+  --brand: #5B6CFF;
+  --brand-ink: #5B6CFF;
+  --ring: rgba(255, 255, 255, 0);
+
+  /* Optional focus hint if you ever need it elsewhere */
+  --img-focus-y: 60%;
+}
+
+/* =========================
+   Reset / Base
+========================= */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body{
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--top-space) + env(safe-area-inset-top));
+  position: relative;
+  background-color: #14848ac3; /* fallback page color lives on body, not the overlay */
+  margin: 0;
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Safe area */
+  padding-bottom: env(safe-area-inset-bottom);
+
+  /* Height handling */
+  min-height: 100svh;
+}
+
+@supports (min-height: 100dvh) {
+  body { min-height: 100dvh; }
+}
+
+/* =========================
+   Background: fixed image layer
+   Add <img class="site-bg" ...> to HTML (see snippet above)
+========================= */
+.site-bg{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: 50% var(--img-focus-y);
+  pointer-events: none;
+  user-select: none;
+  transform: translateZ(0);
+  --darkreader-ignore: true;
+}
+@supports (min-height: 100dvh) {
+  .site-bg { height: 100dvh; }
+}
+
+/* Overlay gradients & base color above the image */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1; /* above image */
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, #380567d7 0%);
+  --darkreader-ignore: true;
+}
+
+/* Safari/iOS Chrome helper for full-height containers */
+.full-height-container{
+  height: -webkit-fill-available;
+  height: 100%;
+}
+
+/* =========================
+   Email Modal
+========================= */
+.email-modal-backdrop{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.55);
+  z-index: 9999;
+}
+
+.email-modal{
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  max-width: 520px;
+  width: 92%;
+  padding: 18px;
+  box-shadow: 0 20px 80px rgba(0,0,0,.5);
+}
+
+.email-modal h3{ margin: 0 0 8px; font-size: 18px; }
+.email-modal p{ margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+
+.email-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.email-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+.email-btn:hover { border-color: rgba(255,255,255,.18); }
+
+.email-actions{ display: flex; gap: 10px; margin-top: 10px; }
+.email-small{ font-size: 12px; color: var(--muted); margin-top: 8px; }
+.email-accent{ border-color: var(--brand); }
+
+@media (max-width: 420px){
+  .email-grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================
+   Layout
+========================= */
+.wrap, header, main, footer {position: relative; z-index: 2; }
+
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 100px; 
+}
+
+.logo{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.logo-badge{
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: linear-gradient(160deg, var(--brand), #8df3c3);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 6px rgba(94,241,167,.08);
+}
+
+.logo-badge svg{ width: 16px; height: 16px; fill: var(--brand-ink); }
+
+.nav{ opacity: .85; }
+.nav a{
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 16px;
+  font-size: .95rem;
+}
+
+main{
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 24px 72px;
+}
+
+.hero{ max-width: 980px; text-align: center; }
+.eyebrow{
+  display: inline-block;
+  font-size: .8rem;
+  color: var(--muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+h1{
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.05;
+  margin: 0 0 16px;
+}
+
+.sub{
+  max-width: 720px;
+  margin: 0 auto 28px;
+  color: #d3d6dd;
+  font-size: clamp(16px, 2.2vw, 20px);
+}
+
+/* =========================
+   Buttons
+========================= */
+.cta{
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn{
+  appearance: none;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.btn-primary{
+  background: var(--brand);
+  color: var(--text);
+  border-color: #5B6CFF;
+}
+.btn-primary:hover{
+  background: #848ff3;
+  color: var(--text);
+  border-color: #5B6CFF;
+}
+
+.btn-ghost{
+  background: transparent;
+  color: var(--text);
+  border-color: #f6f7f9;
+}
+.btn-ghost:hover{ border-color: #2f2f36; }
+
+.note{ margin-top: 14px; color: var(--muted); font-size: .92rem; }
+
+/* =========================
+   Footer & Mail Chooser
+========================= */
+footer{
+  margin-top: auto;
+  padding: 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  background: none !important;
+  background-color: transparent !important;
+  color: var(--text);
+  box-shadow: none;
+  border: none;
+}
+
+.foot{
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.foot a{ color: var(--text); }
+
+#mail-chooser{
+  position: absolute;
+  bottom: 120%;
+  left: 0;
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: .5rem;
+  padding: .75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  width: max-content;
+}
+#mail-chooser .choices{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .5rem;
+}
+#mail-chooser .btn{
+  display: inline-block;
+  padding: .4rem .6rem;
+  border: 1px solid #2a2a2a;
+  border-radius: .4rem;
+  text-decoration: none;
+  color: inherit;
+  background: #1a1a1ade;
+  cursor: pointer;
+}
+#mail-chooser .btn:hover { background: #222; }
+#mail-chooser .close{
+  position: absolute;
+  top: .25rem;
+  right: .4rem;
+  background: transparent;
+  color: #aaa;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* =========================
+   Small Preview “Device”
+========================= */
+.device{
+  margin: 34px auto 0;
+  width: min(960px, 94%);
+  background: var(--card);
+  border: 1px solid #1b1c20;
+  border-radius: 20px;
+  box-shadow: 0 12px 60px -24px rgba(0,0,0,.55);
+  overflow: hidden;
+}
+
+.statusbar{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #9aa0aa;
+  border-bottom: 1px solid #1b1c20;
+  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+}
+
+.viewport{
+  padding: 28px;
+  display: grid;
+  gap: 16px;
+}
+
+.chip{
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid #232429;
+  color: #c7cbd4;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.pill{ display: inline-flex; gap: 10px; align-items: center; }
+
+.rows{ display: grid; gap: 8px; }
+
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #101114;
+  border: 1px solid #1b1c20;
+  border-radius: 12px;
+}
+.row small{ color: #9aa0aa; }
+
+/* =========================
+   Media Queries (layout only)
+========================= */
+@media (max-width: 600px){
+  header{ padding: 16px; }
+  .rows .row{ padding: 12px; }
+
+  .foot{
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .foot a, .foot span{ width: 100%; }
+
+  /* Optional: extra safe-area padding on tiny screens */
+  .my-footer{
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}

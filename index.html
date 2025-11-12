@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>nine185 | We back what we build</title>
+  <meta name="description" content="nine185 is a venture studio and holding company that invests in brands it believes in." />
+  <meta property="og:title" content="nine185 | We back what we build" />
+  <meta property="og:description" content="nine185 is a venture studio and holding company that invests in brands it believes in." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nine185.com" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="533" />
+  <meta property="og:image" content="background3.png" />
+  <link rel="icon" type="image/png" href="favicon2.png" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <img
+  class="site-bg"
+  src="mosaic4.png"
+  alt=""
+  aria-hidden="true"
+/>
+
+  <div class="wrap">
+   <header>
+      <nav class="nav" aria-label="Primary">
+      </nav>
+      <div class="logo" aria-label="nine185">
+        <img src="logo_text_white.png" alt="nine185" style="width: 200px; height:58.34px;">
+      </div>
+   </header>
+
+    <main>
+      <section class="hero">
+        <h1>We invest in brands we believe in.</h1>
+        <p class="sub">nine185 takes responsibility for results. By embedding ourselves deeply into the fabric of your business, we can fine-tune your core competencies to help achieve measurable customer and business value.</p>
+        <div class="cta">
+        <br></br>
+        <br></br>
+          <a id="build-together" class="btn btn-primary" href="mailto:info@nine185.com" target="_blank" rel="noopener">Let's build something together</a>
+        </div>
+        <p class="note"></p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="foot">
+        <span>© nine185, 2025</span>
+        <a id="contact" href="mailto:info@nine185.com">info@nine185.com</a>
+      </div>
+    </footer>
+  </div>
+  <div class="email-modal-backdrop" id="email-chooser-backdrop" role="dialog" aria-modal="true" aria-labelledby="email-chooser-title">
+  <div class="email-modal" role="document">
+    <h3 id="email-chooser-title">Choose your weapon</h3>
+    <p>We’ll open a new compose window with the details pre-filled.</p>
+
+    <div class="email-grid">
+      <button class="email-btn" data-provider="gmail" type="button">Gmail</button>
+      <button class="email-btn" data-provider="outlook" type="button">Outlook.com</button>
+      <button class="email-btn" data-provider="yahoo" type="button">Yahoo Mail</button>
+      <button class="email-btn" data-provider="default" type="button">Default mail app</button>
+    </div>
+
+    <div class="email-actions">
+      <button class="email-btn" data-provider="copy" type="button" style="flex:1">Copy address</button>
+      <button class="email-btn" id="email-chooser-cancel" type="button" style="flex:1">Cancel</button>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  // --- Prefill ---
+  const TO = "info@nine185.com";
+  const SUBJECT = "Partnership inquiry";
+  const BODY = `Hi nine185`
+;
+  // ----------------------------------------
+
+  const enc = encodeURIComponent;
+  const backdrop = document.getElementById("email-chooser-backdrop");
+  const cancelBtn = document.getElementById("email-chooser-cancel");
+  const triggers = [
+    document.getElementById("build-together"),
+    document.getElementById("contact")
+  ].filter(Boolean);
+
+  let lastFocused = null;
+
+  // Keep your existing mailto hrefs as no-JS fallbacks; intercept normal clicks only
+  triggers.forEach(el => {
+    el.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return; // respect new-tab etc.
+      e.preventDefault();
+      openChooser(el);
+    });
+  });
+
+  function openChooser(sourceEl){
+    lastFocused = sourceEl || document.activeElement;
+    backdrop.style.display = "flex";
+    const first = backdrop.querySelector("[data-provider]");
+    if (first) first.focus();
+    document.addEventListener("keydown", onKeyDown);
+    backdrop.addEventListener("click", onBackdropClick);
+    backdrop.querySelectorAll("[data-provider]").forEach(b=>b.addEventListener("click", onPick));
+    cancelBtn.addEventListener("click", closeChooser);
+  }
+
+  function closeChooser(){
+    backdrop.style.display = "none";
+    document.removeEventListener("keydown", onKeyDown);
+    backdrop.removeEventListener("click", onBackdropClick);
+    backdrop.querySelectorAll("[data-provider]").forEach(b=>b.removeEventListener("click", onPick));
+    cancelBtn.removeEventListener("click", closeChooser);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  function onBackdropClick(e){ if (e.target === backdrop) closeChooser(); }
+  function onKeyDown(e){ if (e.key === "Escape") closeChooser(); }
+
+  async function copyToClipboard(text){
+    try { await navigator.clipboard.writeText(text); }
+    catch {
+      const ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta);
+      ta.select(); document.execCommand("copy"); ta.remove();
+    }
+  }
+
+  function onPick(e){
+    const provider = e.currentTarget.getAttribute("data-provider");
+    const to = enc(TO), subject = enc(SUBJECT), body = enc(BODY);
+    let url = "";
+
+    switch(provider){
+      case "gmail":
+        url = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+        break;
+      case "outlook":
+        url = `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${subject}&body=${body}`;
+        break;
+      case "yahoo":
+        url = `https://compose.mail.yahoo.com/?to=${to}&subject=${subject}&body=${body}`;
+        break;
+      case "default":
+        url = `mailto:${TO}?subject=${subject}&body=${body}`;
+        break;
+      case "copy":
+        copyToClipboard(TO);
+        e.currentTarget.textContent = "Copied!";
+        setTimeout(()=> e.currentTarget.textContent = "Copy address", 1200);
+        return; // keep dialog open
+    }
+
+    if (url){
+      window.open(url, "_blank", "noopener,noreferrer");
+      closeChooser();
+    }
+  }
+})();
+</script>
+</body>
+</html>
