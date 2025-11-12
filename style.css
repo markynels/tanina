@@ -55,7 +55,7 @@ body{
   height: 100svh;
   min-height: 100svh;
   object-fit: cover;
-  object-position: 50% var(--img-focus-y);
+  object-position: 70% var(--img-focus-y);
   pointer-events: none;
   user-select: none;
   transform: translateZ(0);
