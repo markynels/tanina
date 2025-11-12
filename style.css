@@ -1,6 +1,7 @@
 /* =========================
    Theme Tokens
 ========================= */
+@import url('https://fonts.googleapis.com/css2?family=Ovo&display=swap');
 :root{
   --bg: #000000;
   --card: #2b1e0be6;
@@ -28,7 +29,7 @@ body{
   background-color: #14848ab2; /* fallback page color lives on body, not the overlay */
   margin: 0;
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Ovo', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
